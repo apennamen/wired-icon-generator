@@ -5394,6 +5394,39 @@ wired-button@^2.0.2:
     lit-element "^2.2.1"
     wired-lib "^2.0.0"
 
+wired-card@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wired-card/-/wired-card-2.0.2.tgz#404749fb5ecfc5405a0d15b689f78d909e5ec12e"
+  integrity sha512-miGE+hCqq8TKIXliyosBSHKVc/whBXdmFP6jztqTflcXVh1nNyYX8bDEXbscXbn6LVmeyHpoc59Nz7RASoeAmw==
+  dependencies:
+    lit-element "^2.2.1"
+    wired-lib "^2.0.0"
+
+wired-combo@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wired-combo/-/wired-combo-2.0.2.tgz#7ed4566d5a63652e93b6f50ddc059c6b612f8a7b"
+  integrity sha512-SpOiXG+FeYI/N2s4x7kRcscUNvRwrbuozTbMwLKv53+ifYFnAlpSCF0fjvhK2eDkChkRg/FajdveSMf60uakmA==
+  dependencies:
+    lit-element "^2.2.1"
+    wired-card "^2.0.2"
+    wired-lib "^2.0.0"
+
+wired-input@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wired-input/-/wired-input-2.0.2.tgz#2780dad520f166693901728fbbf8fb767cdd69bc"
+  integrity sha512-wlv5LIFHLI1PWGIvPvJ2OuYvE4swcdrq3+BfEQlGPyNEcNibwnyzKuY0UJ5MbR1dIWGoYnhXjlgKrDSyv8UBaA==
+  dependencies:
+    lit-element "^2.2.1"
+    wired-lib "^2.0.0"
+
+wired-item@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wired-item/-/wired-item-2.0.2.tgz#acd8a8f355c9265e77e9f880e3a853f9fc7c387f"
+  integrity sha512-RAMx72R+FYJZ9MAliEtAriu+9goPJc4S5pUaP8lBxjMpBMBE+qg0d15I5/rpgY6i55rbzpfr8ts7DoLQ76vDjg==
+  dependencies:
+    lit-element "^2.2.1"
+    wired-lib "^2.0.0"
+
 wired-lib@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/wired-lib/-/wired-lib-2.0.0.tgz#675995ffb9e75b172279ae4db38185ab5011157b"
