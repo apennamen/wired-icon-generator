@@ -1,0 +1,61 @@
+{
+  "scripts": {
+    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
+    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
+    "start": "es-dev-server"
+  },
+  "devDependencies": {
+    "@open-wc/building-rollup": "^1.0.0",
+    "@open-wc/eslint-config": "^2.0.0",
+    "es-dev-commonjs-transformer": "^0.1.1",
+    "es-dev-server": "^1.5.0",
+    "eslint": "^6.1.0",
+    "husky": "^1.0.0",
+    "lint-staged": "^8.0.0",
+    "prettier": "^2.0.4",
+    "rimraf": "^2.6.3",
+    "rollup": "^2.3.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "name": "wired-icon-generator",
+  "version": "0.0.0",
+  "description": "Webcomponent wired-icon-generator following open-wc recommendations",
+  "author": "wired-icon-generator",
+  "license": "MIT",
+  "dependencies": {
+    "highlight.js": "^10.0.1",
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0",
+    "roughjs": "3.1.0",
+    "wired-button": "^2.0.2",
+    "wired-link": "^2.0.2",
+    "wired-textarea": "^2.0.2"
+  }
+}
