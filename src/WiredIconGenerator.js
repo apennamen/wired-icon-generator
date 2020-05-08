@@ -9,11 +9,13 @@ import 'wired-link';
 hljs.registerLanguage('xml', xml);
 
 import { ExtWiredTextarea } from './ExtWiredTextarea';
+import { ConfigCreator } from './ConfigCreator';
 import { wiredSvg } from './wiredSvg';
 import { githubLogo } from './githubLogo';
 import { highlightCss } from './highlightCss';
 
 customElements.define('x-wired-textarea', ExtWiredTextarea);
+customElements.define('config-creator', ConfigCreator);
 
 export class WiredIconGenerator extends LitElement {
   static get properties() {
@@ -62,9 +64,17 @@ export class WiredIconGenerator extends LitElement {
         flex-grow: 1;
       }
 
-      .config {
+      wired-button {
+        background: #90C1B3;
+      }
+
+      .config,
+      .loading {
         display: flex;
         flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-bottom: 1em;
       }
 
       #input {
@@ -72,16 +82,6 @@ export class WiredIconGenerator extends LitElement {
         font-size: 2vmin;
         text-align: left;
         background: #fff;
-      }
-      wired-button {
-        background: #90C1B3;
-      }
-
-      .button {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-left: 1em;
       }
 
       .output {
@@ -97,8 +97,13 @@ export class WiredIconGenerator extends LitElement {
         max-width: 60vw;
       }
 
+      #svg {
+        border: 2px dashed #1a2b42;
+        width: 80px;
+        height: 80px;
+      }
       #svg svg {
-        width: 20%;
+        width: 80px;
         max-height: 80px;
       }
 
@@ -149,7 +154,8 @@ export class WiredIconGenerator extends LitElement {
     const handleConvert = () => {
       const svgToConvert = this.renderRoot.querySelector('#svg').firstElementChild;
       if (!svgToConvert) return;
-      wiredSvg(svgToConvert, {roughness: '0.1', strokeWidth: 1, fillStyle: 'zigzag', hachureGap: 1.5, fill: '#90C1B3'});
+      const { config } = this.renderRoot.querySelector('config-creator');
+      wiredSvg(svgToConvert, config);
       this.outputSvg = svgToConvert.outerHTML;
       this.highlightedCode = hljs.highlight('xml', this.outputSvg);
       this.requestUpdate();
@@ -168,23 +174,21 @@ export class WiredIconGenerator extends LitElement {
 
         <p>Generate a sketchy version of an SVG Icon</p>
 
-        <div class="config">
+        <div class="loading">
           <x-wired-textarea id="input" rows="8" .placeholder=${placeholder}></x-wired-textarea>
-          <div class="button">
-            <wired-button elevation="2" @click=${handleRefresh}>2. Load It</wired-button>
-            <wired-button elevation="2" @click=${handleConvert}>3. Convert</wired-button>
-          </div>
+          <wired-button elevation="2" @click=${handleRefresh}>2. Load It</wired-button>
         </div>
-        <div class="output">
+        <div class="config">
           <div id="svg">${unsafeHTML(this.inputSvg)}</div>
+          <config-creator></config-creator>
+          <wired-button elevation="2" @click=${handleConvert}>3. Convert</wired-button>
         </div>
 
+        <div class="result">
+          <pre><code class="xml hljs">${unsafeHTML(this.highlightedCode.value)}</code></pre>
+          <wired-button style="margin-left: 10px" elevation="2" @click=${handleCopy}>Copy</wired-button>
+        </div>
       </main>
-
-      <div class="result">
-        <pre><code class="xml hljs">${unsafeHTML(this.highlightedCode.value)}</code></pre>
-        <wired-button style="margin-left: 10px" elevation="2" @click=${handleCopy}>Copy</wired-button>
-      </div>
       <footer class="app-footer">
         <span>Want more ? See <wired-link elevation="2" href="https://wiredjs.com" target="_blank">Wired Elements</wired-link></span>
         ${githubLogo}
