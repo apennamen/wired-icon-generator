@@ -11,7 +11,8 @@ hljs.registerLanguage('xml', xml);
 import { ExtWiredTextarea } from './ExtWiredTextarea';
 import { ConfigCreator } from './ConfigCreator';
 import { wiredSvg } from './wiredSvg';
-import githubLogo from './githubLogo';
+import { githubLogo } from './githubLogo';
+import { highlightCss } from './highlightCss';
 
 customElements.define('x-wired-textarea', ExtWiredTextarea);
 customElements.define('config-creator', ConfigCreator);
@@ -25,7 +26,9 @@ export class WiredIconGenerator extends LitElement {
   }
 
   static get styles() {
-    return css`
+    return [
+      highlightCss,
+      css`
       :host {
         min-height: 100vh;
         display: flex;
@@ -122,7 +125,7 @@ export class WiredIconGenerator extends LitElement {
         height: 2em;
         margin-left: 1em;
       }
-    `;
+    `];
   }
     
   constructor() {
@@ -167,7 +170,6 @@ export class WiredIconGenerator extends LitElement {
       document.body.removeChild(dummy);
     }
     return html`
-      <link href="node_modules/highlight.js/styles/obsidian.css" rel="stylesheet">
       <main>
         <h1>Wired Icon Generator</h1>
 
@@ -190,7 +192,7 @@ export class WiredIconGenerator extends LitElement {
       </main>
       <footer class="app-footer">
         <span>Want more ? See <wired-link elevation="2" href="https://wiredjs.com" target="_blank">Wired Elements</wired-link></span>
-        ${githubLogo()}
+        ${githubLogo}
       </footer>
     `;
   }
