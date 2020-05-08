@@ -20,7 +20,7 @@ export class WiredIconGenerator extends LitElement {
       css`
       :host {
         --scrollbarBG: #CFD8DC;
-        --thumbBG: #1a2b42;
+        --thumbBG: var(--text-color);
       }
 
       wired-button {
@@ -51,7 +51,7 @@ export class WiredIconGenerator extends LitElement {
       }
 
       #svg {
-        border: 2px dashed #1a2b42;
+        border: 2px dashed var(--text-color);
         width: 80px;
         height: 80px;
       }
