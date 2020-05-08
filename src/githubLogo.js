@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
 
-export default () => html`
+export const githubLogo = html`
 <a href="https://github.com/wiredjs/wired-elements" target="_blank">
 <svg viewBox="-1 -1 18 18">
     <defs>
