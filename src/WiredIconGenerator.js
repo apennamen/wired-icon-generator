@@ -155,7 +155,6 @@ export class WiredIconGenerator extends LitElement {
       const svgToConvert = this.renderRoot.querySelector('#svg').firstElementChild;
       if (!svgToConvert) return;
       const { config } = this.renderRoot.querySelector('config-creator');
-      console.log(config);
       wiredSvg(svgToConvert, config);
       this.outputSvg = svgToConvert.outerHTML;
       this.highlightedCode = hljs.highlight('xml', this.outputSvg);
