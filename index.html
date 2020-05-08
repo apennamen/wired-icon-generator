@@ -13,9 +13,11 @@
 <body>
   <h1>Wired Icon Generator</h1>
   <p>Generate a sketchy version of an SVG Icon</p>
-  <wired-icon-generator>
-    <div class="lds-ring" id="loader"><div></div><div></div><div></div><div></div></div>
-  </wired-icon-generator>
+  <main>
+    <wired-icon-generator>
+      <div class="lds-ring" id="loader"><div></div><div></div><div></div><div></div></div>
+    </wired-icon-generator>
+  </main>
   <footer>
     <span>Want more ?&nbsp;</span><wired-link elevation="2" href="https://wiredjs.com" target="_blank">Wired Elements</wired-link>
     <a href="https://github.com/wiredjs/wired-elements" target="_blank">
@@ -47,6 +49,7 @@
       margin: 0;
       padding: 0;
       background-color: #fff;
+      --primary-color: #90C1B3;
     }
 
     body {
@@ -75,7 +78,7 @@
       margin-bottom: 1em;
       flex-direction: row;
       justify-content: baseline;
-      --wired-link-decoration-color: #90C1B3;
+      --wired-link-decoration-color: var(--primary-color);
     }
 
     footer svg {
@@ -96,10 +99,10 @@
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid #90C1B3;
+    border: 8px solid var(--primary-color);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #90C1B3 transparent transparent transparent;
+    border-color:var(--primary-color) transparent transparent transparent;
   }
   .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
