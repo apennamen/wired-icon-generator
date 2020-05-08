@@ -4,14 +4,12 @@ import hljs from 'highlight.js';
 import xml from 'highlight.js/lib/languages/xml'
 import 'wired-textarea';
 import 'wired-button';
-import 'wired-link';
 
 hljs.registerLanguage('xml', xml);
 
 import { ExtWiredTextarea } from './ExtWiredTextarea';
 import { ConfigCreator } from './ConfigCreator';
 import { wiredSvg } from './wiredSvg';
-import { githubLogo } from './githubLogo';
 import { highlightCss } from './highlightCss';
 
 customElements.define('x-wired-textarea', ExtWiredTextarea);
@@ -30,19 +28,8 @@ export class WiredIconGenerator extends LitElement {
       highlightCss,
       css`
       :host {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        font-size: calc(10px + 2vmin);
-        color: #1a2b42;
-        max-width: 960px;
-        margin: 0 auto;
-        text-align: center;
         --scrollbarBG: #CFD8DC;
         --thumbBG: #1a2b42;
-        --wired-link-decoration-color: #90C1B3;
       }
       code::-webkit-scrollbar {
         width: 30px;
@@ -58,10 +45,6 @@ export class WiredIconGenerator extends LitElement {
         background-color: var(--thumbBG) ;
         border-radius: 6px;
         border: 1px solid var(--scrollbarBG);
-      }
-
-      main {
-        flex-grow: 1;
       }
 
       wired-button {
@@ -112,19 +95,6 @@ export class WiredIconGenerator extends LitElement {
         flex-direction: row;
         align-items: center;
       }
-
-      .app-footer {
-        display: flex;
-        font-size: calc(12px + 0.5vmin);
-        margin-bottom: 1em;
-        flex-direction: row;
-        justify-content: baseline;
-      }
-
-      .app-footer svg {
-        height: 2em;
-        margin-left: 1em;
-      }
     `];
   }
     
@@ -137,6 +107,10 @@ export class WiredIconGenerator extends LitElement {
 </svg>
     `;
     this.highlightedCode = hljs.highlight('xml', this.outputSvg.trim());
+  }
+
+  firstUpdated() {
+    this.dispatchEvent(new CustomEvent('loaded', {bubbles: true, composed: true}));
   }
 
   render() {
@@ -169,11 +143,6 @@ export class WiredIconGenerator extends LitElement {
       document.body.removeChild(dummy);
     }
     return html`
-      <main>
-        <h1>Wired Icon Generator</h1>
-
-        <p>Generate a sketchy version of an SVG Icon</p>
-
         <div class="loading">
           <x-wired-textarea id="input" rows="8" .placeholder=${placeholder}></x-wired-textarea>
           <wired-button elevation="2" @click=${handleRefresh}>2. Load It</wired-button>
@@ -188,11 +157,6 @@ export class WiredIconGenerator extends LitElement {
           <pre><code class="xml hljs">${unsafeHTML(this.highlightedCode.value)}</code></pre>
           <wired-button style="margin-left: 10px" elevation="2" @click=${handleCopy}>Copy</wired-button>
         </div>
-      </main>
-      <footer class="app-footer">
-        <span>Want more ? See <wired-link elevation="2" href="https://wiredjs.com" target="_blank">Wired Elements</wired-link></span>
-        ${githubLogo}
-      </footer>
     `;
   }
 }

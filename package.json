@@ -33,11 +33,6 @@
     "singleQuote": true,
     "arrowParens": "avoid"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
@@ -51,7 +46,6 @@
   "author": "wired-icon-generator",
   "license": "MIT",
   "dependencies": {
-    "@vaadin/router": "^1.7.2",
     "highlight.js": "^10.0.1",
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0",
