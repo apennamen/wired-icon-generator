@@ -42,32 +42,34 @@ export class WiredIconGenerator extends LitElement {
         background: #fff;
       }
 
-      .output {
-        padding-top: 2em;
+      #config {
+        width: 100%;
+        margin-top: 2em;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
       }
 
       #svg {
         border: 2px dashed var(--text-color);
-        width: 80px;
-        height: 80px;
-        margin: auto;
-        margin-bottom: 1em;
-        margin-top: 1em;
+        width: 100px;
+        height: 100px;
       }
 
       #svg svg {
-        width: 80px;
-        max-height: 80px;
+        width: 100px;
+        height: 100px;
+      }
+
+      code-highlighter {
+        margin-top: 2em;
       }
     `];
   }
     
   constructor() {
     super();
-    this.livereload = false;
+    this.livereload = true;
     this.inputSvg = '';
     this.outputSvg = `
 <svg viewbox="0 0 42 42">
@@ -108,8 +110,10 @@ export class WiredIconGenerator extends LitElement {
     return html`
         <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
         <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
-        <div id="svg">${unsafeHTML(this.inputSvg)}</div>
-        <config-creator @confchange=${handleConfChange}></config-creator>
+        <div id="config">
+          <config-creator @confchange=${handleConfChange}></config-creator>
+          <div id="svg">${unsafeHTML(this.inputSvg)}</div>
+        </div>
         <div>
           <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
           <wired-checkbox @change=${toggleLivereload} ?checked=${this.livereload}>Live Reload</wired-checkbox>

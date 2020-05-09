@@ -1,10 +1,10 @@
 import { LitElement, html, css } from 'lit-element';
 import 'wired-input';
 
-const isFloat = n => (n === +n && n !== (n|0));
-const isInt = n => Number.isInteger(n);
-const isValidNumber = n => !Number.isNaN(n) && (isInt(n) || isFloat(n));
-const isValidStrNum = s => !!s.trim() && isValidNumber(+s);
+const isFloat = (n) => (n === +n && n !== (n|0));
+const isInt = (n) => Number.isInteger(n);
+const isValidNumber = (n) => !Number.isNaN(n) && (isInt(n) || isFloat(n));
+const isValidStrNum = (s) => !!s.trim() && isValidNumber(+s);
         
 
 export class NumberSelector extends LitElement {
