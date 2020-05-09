@@ -19,8 +19,9 @@ export class CodeHighlighter extends LitElement {
             css`
               :host {
                 display: flex;
-                flex-direction: row;
-                align-items: center;
+                flex-direction: column;
+                align-items: baseline;
+                justify-content: flex-start;
               }
               wired-button {
                 background: var(--primary-color);
@@ -42,6 +43,9 @@ export class CodeHighlighter extends LitElement {
                 background-color: var(--thumbBG) ;
                 border-radius: 6px;
                 border: 1px solid var(--scrollbarBG);
+              }
+              pre {
+                margin-bottom: 0;
               }
             `,
         ];
@@ -66,7 +70,7 @@ export class CodeHighlighter extends LitElement {
         
         return html`
             <pre><code class="xml hljs">${unsafeHTML(highlightedCode.value)}</code></pre>
-            <wired-button style="margin-left: 10px" elevation="2" @click=${handleCopy}>Copy</wired-button>
+            <wired-button elevation="2" @click=${handleCopy}>Copy</wired-button>
         `;
     }
 }

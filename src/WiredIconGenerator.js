@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import 'wired-textarea';
 import 'wired-button';
+import 'wired-checkbox';
 
 import { ExtWiredTextarea } from './ExtWiredTextarea';
 import { ConfigCreator } from './ConfigCreator';
@@ -19,21 +20,19 @@ export class WiredIconGenerator extends LitElement {
       highlightCss,
       css`
       :host {
-        --scrollbarBG: #CFD8DC;
-        --thumbBG: var(--text-color);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 1em;
       }
 
       wired-button {
         background: var(--primary-color);
       }
-
-      .config,
-      .loading {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-        padding-bottom: 1em;
+      wired-checkbox {
+        font-size: 2vmin;
       }
 
       #input {
@@ -54,6 +53,9 @@ export class WiredIconGenerator extends LitElement {
         border: 2px dashed var(--text-color);
         width: 80px;
         height: 80px;
+        margin: auto;
+        margin-bottom: 1em;
+        margin-top: 1em;
       }
 
       #svg svg {
@@ -65,16 +67,17 @@ export class WiredIconGenerator extends LitElement {
     
   constructor() {
     super();
+    this.livereload = false;
     this.inputSvg = '';
     this.outputSvg = `
 <svg viewbox="0 0 42 42">
-  <text>4. Grab the converted svg code here!</text>
+  <text>Grab the converted svg code here!</text>
 </svg>
     `;
   }
 
   render() {
-    const placeholder = `1. Paste your svg here! Like this:
+    const placeholder = `Paste your svg here! Like this:
 
 <svg viewbox="0 0 16 16"><path d="M9.5 14c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"></path></svg>
     `;
@@ -94,15 +97,22 @@ export class WiredIconGenerator extends LitElement {
       this.outputSvg = svgToConvert.outerHTML;
       return this.requestUpdate();
     }
+    const handleConfChange = () => {
+      if (this.livereload) {
+        handleConvert();
+      }
+    }
+    const toggleLivereload = (e) => {
+      this.livereload = e.detail.checked;
+    }
     return html`
-        <div class="loading">
-          <x-wired-textarea id="input" rows="8" .placeholder=${placeholder}></x-wired-textarea>
-          <wired-button elevation="2" @click=${handleLoad}>2. Load It</wired-button>
-        </div>
-        <div class="config">
-          <div id="svg">${unsafeHTML(this.inputSvg)}</div>
-          <config-creator></config-creator>
-          <wired-button elevation="2" @click=${handleConvert}>3. Convert</wired-button>
+        <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
+        <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
+        <div id="svg">${unsafeHTML(this.inputSvg)}</div>
+        <config-creator @confchange=${handleConfChange}></config-creator>
+        <div>
+          <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
+          <wired-checkbox @change=${toggleLivereload} ?checked=${this.livereload}>Live Reload</wired-checkbox>
         </div>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;

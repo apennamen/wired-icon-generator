@@ -9,6 +9,9 @@ export class ExtWiredTextarea extends WiredTextarea {
         return [
             super.styles,
             css`
+            :host {
+                width: 60vw;
+            }
             textarea {
                 scrollbar-width: thin;
                 scrollbar-color: var(--thumbBG) transparent;

@@ -45,12 +45,14 @@
   <style>
     html, body {
       font-family: 'Gloria Hallelujah', cursive;
-      height: 100%;
+      height: 100vh;
       margin: 0;
       padding: 0;
       background-color: #fff;
       --primary-color: #90C1B3;
       --text-color: #1a2b42;
+      --scrollbarBG: #CFD8DC;
+      --thumbBG: var(--text-color);
     }
 
     body {
@@ -58,19 +60,36 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      font-size: calc(10px + 2vmin);
+      font-size: calc(1em + 2vmin);
       color: var(--text-color);
       max-width: 960px;
       margin: 0 auto;
       text-align: center;
     }
 
+    :root::-webkit-scrollbar {
+      width: 10px;
+    }
+    :root {
+      scrollbar-width: thin;
+      scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    }
+    :root::-webkit-scrollbar-track {
+      background: var(--scrollbarBG);
+    }
+    :root::-webkit-scrollbar-thumb {
+      background-color: var(--thumbBG) ;
+      border-radius: 6px;
+      border: 1px solid var(--scrollbarBG);
+    }
+
     h1, p {
       margin-block-start: 0;
     }
 
-    wired-icon-generator {
+    main {
       flex-grow: 1;
+      width: 80%;
     }
 
     footer {
