@@ -14,6 +14,8 @@ const DEFAULT_CONFIG = {
     strokeWidth: 1,
     roughness: 0.1,
     stroke: '#000',
+    hachureAngle: -41,
+    hachureGap: 4,
 };
 
 export class ConfigCreator extends LitElement {
@@ -24,7 +26,7 @@ export class ConfigCreator extends LitElement {
                 width: 100%;
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;
+                justify-content: space-around;
                 font-size: 2vmin;
                 font-family: inherit;
                 --wired-item-selected-bg: var(--primary-color);
@@ -50,21 +52,13 @@ export class ConfigCreator extends LitElement {
     }
 
     render() {
-        const handleFillColorChange = (e) => {
-            this.updateConf({fill: e.detail.color});
-        }
-        const handleStrokeColorChange = (e) => {
-            this.updateConf({stroke: e.detail.color});
-        }
-        const handleFillStyleChange = (e) => {
-            this.updateConf({fillStyle: e.detail.selected});
-        }
-        const handleRoughnessChange = (e) => {
-            this.updateConf({roughness: e.detail.num});
-        }
-        const handleStrokeWidthChange = (e) => {
-            this.updateConf({strokeWidth: e.detail.num});
-        }
+        const handleFillColorChange = (e) => this.updateConf({fill: e.detail.color});
+        const handleStrokeColorChange = (e) => this.updateConf({stroke: e.detail.color});
+        const handleFillStyleChange = (e) => this.updateConf({fillStyle: e.detail.selected});
+        const handleRoughnessChange = (e) => this.updateConf({roughness: e.detail.num});
+        const handleStrokeWidthChange = (e) => this.updateConf({strokeWidth: e.detail.num});
+        const handleHachureGapChange = (e) => this.updateConf({hachureGap: e.detail.num});
+        const handleHachureAngleChange = (e) => this.updateConf({hachureAngle: e.detail.num});
 
         return html`
             <div class="options">
@@ -78,6 +72,16 @@ export class ConfigCreator extends LitElement {
                     num="${DEFAULT_CONFIG.strokeWidth}"
                     @numchange=${handleStrokeWidthChange}>
                 </number-selector>
+                <number-selector
+                    label="Hachure Gap"
+                    num="${DEFAULT_CONFIG.hachureGap}"
+                    @numchange=${handleHachureGapChange}>
+                </number-selector>
+                <number-selector
+                    label="Hachure Angle"
+                    num="${DEFAULT_CONFIG.hachureAngle}"
+                    @numchange=${handleHachureAngleChange}>
+                </number-selector>
             </div>
             <div class="options">
                 <color-selector
@@ -90,8 +94,6 @@ export class ConfigCreator extends LitElement {
                     label="Stroke color"
                     @colorchange=${handleStrokeColorChange}>
                 </color-selector>
-            </div>
-            <div class="options">
                 <div><span>Fill style</span>
                     <wired-combo
                         id="fillStyleCombo"
@@ -102,7 +104,6 @@ export class ConfigCreator extends LitElement {
                         <wired-item value="solid">Solid</wired-item>
                         <wired-item value="hachure">Hachure</wired-item>
                         <wired-item value="cross-hatch">Cross-Hatch</wired-item>
-                        <wired-item value="dots">Dots</wired-item>
                         <wired-item value="dashed">Dashed</wired-item>
                     </wired-combo>
                 </div>
