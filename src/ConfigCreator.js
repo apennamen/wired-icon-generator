@@ -59,14 +59,10 @@ export class ConfigCreator extends LitElement {
         const handleStrokeWidthChange = (e) => this.updateConf({strokeWidth: e.detail.num});
         const handleHachureGapChange = (e) => this.updateConf({hachureGap: e.detail.num});
         const handleHachureAngleChange = (e) => this.updateConf({hachureAngle: e.detail.num});
+        const handleFillWeightChange = (e) => this.updateConf({fillWeight: e.detail.num});
 
         return html`
             <div class="options">
-                <number-selector
-                    label="Roughness"
-                    num="${DEFAULT_CONFIG.roughness}"
-                    @numchange=${handleRoughnessChange}>
-                </number-selector>
                 <number-selector
                     label="Stroke Width"
                     num="${DEFAULT_CONFIG.strokeWidth}"
@@ -81,6 +77,11 @@ export class ConfigCreator extends LitElement {
                     label="Hachure Angle"
                     num="${DEFAULT_CONFIG.hachureAngle}"
                     @numchange=${handleHachureAngleChange}>
+                </number-selector>
+                <number-selector
+                    label="Fill Weight"
+                    num="${DEFAULT_CONFIG.fillWeight}"
+                    @numchange=${handleFillWeightChange}>
                 </number-selector>
             </div>
             <div class="options">
@@ -107,6 +108,11 @@ export class ConfigCreator extends LitElement {
                         <wired-item value="dashed">Dashed</wired-item>
                     </wired-combo>
                 </div>
+                <number-selector
+                    label="Roughness"
+                    num="${DEFAULT_CONFIG.roughness}"
+                    @numchange=${handleRoughnessChange}>
+                </number-selector>
             </div>
     `;
     }
