@@ -64,6 +64,7 @@ export class WiredIconGenerator extends LitElement {
     
   constructor() {
     super();
+    this.livereload = true;
     this.inputSvg = '';
     this.outputSvg = `
 <svg viewbox="0 0 42 42">
@@ -93,11 +94,16 @@ export class WiredIconGenerator extends LitElement {
       this.outputSvg = svgToConvert.outerHTML;
       return this.requestUpdate();
     }
+    const handleConfChange = () => {
+      if (this.livereload) {
+        handleConvert();
+      }
+    }
     return html`
         <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
         <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
         <div id="svg">${unsafeHTML(this.inputSvg)}</div>
-        <config-creator></config-creator>
+        <config-creator @confchange=${handleConfChange}></config-creator>
         <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;

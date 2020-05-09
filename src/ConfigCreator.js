@@ -8,7 +8,7 @@ customElements.define('color-selector', ColorSelector);
 customElements.define('number-selector', NumberSelector);
 
 const DEFAULT_CONFIG = {
-    fill: '#fff',
+    fill: '#f00',
     fillStyle: 'zigzag',
     fillWeight: 1.5,
     strokeWidth: 1,
@@ -46,26 +46,24 @@ export class ConfigCreator extends LitElement {
 
     constructor() {
         super();
-        DEFAULT_CONFIG.fill = getComputedStyle(document.documentElement)
-            .getPropertyValue('--primary-color').trim();
         this._config = { ...DEFAULT_CONFIG };
     }
 
     render() {
         const handleFillColorChange = (e) => {
-            this._config = {...this._config, fill: e.detail.color};
+            this.updateConf({fill: e.detail.color});
         }
         const handleStrokeColorChange = (e) => {
-            this._config = {...this._config, stroke: e.detail.color};
+            this.updateConf({stroke: e.detail.color});
         }
         const handleFillStyleChange = (e) => {
-            this._config = {...this._config, fillStyle: e.detail.selected};
+            this.updateConf({fillStyle: e.detail.selected});
         }
         const handleRoughnessChange = (e) => {
-            this._config = {...this.config, roughness: e.detail.num };
+            this.updateConf({roughness: e.detail.num});
         }
         const handleStrokeWidthChange = (e) => {
-            this._config = {...this.config, strokeWidth: e.detail.num };
+            this.updateConf({strokeWidth: e.detail.num});
         }
 
         return html`
@@ -110,5 +108,10 @@ export class ConfigCreator extends LitElement {
                 </div>
             </div>
     `;
+    }
+
+    updateConf(prop) {
+        this._config = { ...this._config, ...prop};
+        this.dispatchEvent(new Event('confchange'));
     }
 }
