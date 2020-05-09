@@ -5420,6 +5420,14 @@ wired-card@^2.0.2:
     lit-element "^2.2.1"
     wired-lib "^2.0.0"
 
+wired-checkbox@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wired-checkbox/-/wired-checkbox-2.0.2.tgz#9f3f6eb49969e673a3049126922f364b845c7dd2"
+  integrity sha512-8RU2gNGUNaJnTze3l4NPoslHkUB7G8b0uV702AZvbgWuT2AdcSecfv3m/PJVflAyY8FWuwIArBqgOqh48IRbnw==
+  dependencies:
+    lit-element "^2.2.1"
+    wired-lib "^2.0.0"
+
 wired-combo@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/wired-combo/-/wired-combo-2.0.2.tgz#7ed4566d5a63652e93b6f50ddc059c6b612f8a7b"

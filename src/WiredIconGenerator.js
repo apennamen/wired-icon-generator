@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import 'wired-textarea';
 import 'wired-button';
-import 'wired-input';
+import 'wired-checkbox';
 
 import { ExtWiredTextarea } from './ExtWiredTextarea';
 import { ConfigCreator } from './ConfigCreator';
@@ -30,6 +30,9 @@ export class WiredIconGenerator extends LitElement {
 
       wired-button {
         background: var(--primary-color);
+      }
+      wired-checkbox {
+        font-size: 2vmin;
       }
 
       #input {
@@ -64,7 +67,7 @@ export class WiredIconGenerator extends LitElement {
     
   constructor() {
     super();
-    this.livereload = true;
+    this.livereload = false;
     this.inputSvg = '';
     this.outputSvg = `
 <svg viewbox="0 0 42 42">
@@ -99,12 +102,18 @@ export class WiredIconGenerator extends LitElement {
         handleConvert();
       }
     }
+    const toggleLivereload = (e) => {
+      this.livereload = e.detail.checked;
+    }
     return html`
         <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
         <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
         <div id="svg">${unsafeHTML(this.inputSvg)}</div>
         <config-creator @confchange=${handleConfChange}></config-creator>
-        <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
+        <div>
+          <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
+          <wired-checkbox @change=${toggleLivereload} ?checked=${this.livereload}>Live Reload</wired-checkbox>
+        </div>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;
   }

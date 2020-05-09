@@ -51,6 +51,7 @@
     "lit-html": "^1.0.0",
     "roughjs": "3.1.0",
     "wired-button": "^2.0.2",
+    "wired-checkbox": "^2.0.2",
     "wired-combo": "^2.0.2",
     "wired-input": "^2.0.2",
     "wired-item": "^2.0.2",
