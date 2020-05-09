@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import 'wired-textarea';
 import 'wired-button';
+import 'wired-input';
 
 import { ExtWiredTextarea } from './ExtWiredTextarea';
 import { ConfigCreator } from './ConfigCreator';
@@ -31,19 +32,6 @@ export class WiredIconGenerator extends LitElement {
         background: var(--primary-color);
       }
 
-      .loading {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline; 
-        padding-bottom: 1em;
-      }
-
-      .config {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-      }
-
       #input {
         font-family: monospace;
         font-size: 2vmin;
@@ -64,6 +52,7 @@ export class WiredIconGenerator extends LitElement {
         height: 80px;
         margin: auto;
         margin-bottom: 1em;
+        margin-top: 1em;
       }
 
       #svg svg {
@@ -105,14 +94,10 @@ export class WiredIconGenerator extends LitElement {
       return this.requestUpdate();
     }
     return html`
-        <div class="loading">
-          <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
-          <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
-        </div>
+        <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
+        <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
         <div id="svg">${unsafeHTML(this.inputSvg)}</div>
-        <div class="config">
-          <config-creator></config-creator>
-        </div>
+        <config-creator></config-creator>
         <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;
