@@ -21,7 +21,7 @@ export class NumSliderSelector extends LitElement {
                 --wired-slider-knob-color: var(--primary-color);
             }
             wired-slider {
-                width: 6em;
+                width: 8em;
             }
         `;
     }

@@ -32,9 +32,9 @@ export class CodeHighlighter extends LitElement {
               code {
                 scrollbar-width: thin;
                 scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-                font-size: 2vmin;
+                font-size: 14px;
                 text-align: left;
-                max-width: 60vw;
+                max-width: 80vw;
               }
               code::-webkit-scrollbar-track {
                 background: var(--scrollbarBG);
