@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
     strokeWidth: 1,
     roughness: 0.1,
     stroke: '#000',
-    hachureAngle: -41,
+    hachureAngle: -40,
     hachureGap: 4,
 };
 
