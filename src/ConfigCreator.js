@@ -54,25 +54,16 @@ export class ConfigCreator extends LitElement {
     }
 
     render() {
-        const handleFillColorChange = (e) => this.updateConf({fill: e.detail.color});
-        const handleStrokeColorChange = (e) => this.updateConf({stroke: e.detail.color});
-        const handleFillStyleChange = (e) => this.updateConf({fillStyle: e.detail.selected});
-        const handleRoughnessChange = (e) => this.updateConf({roughness: e.detail.num});
-        const handleStrokeWidthChange = (e) => this.updateConf({strokeWidth: e.detail.num});
-        const handleHachureGapChange = (e) => this.updateConf({hachureGap: e.detail.num});
-        const handleHachureAngleChange = (e) => this.updateConf({hachureAngle: e.detail.num});
-        const handleFillWeightChange = (e) => this.updateConf({fillWeight: e.detail.num});
-
         return html`
             <div class="options">
                 <num-input-selector
                     num="${DEFAULT_CONFIG.strokeWidth}"
-                    @numchange=${handleStrokeWidthChange}>
+                    @numchange=${this.handleStrokeWidthChange}>
                     Stroke Width
                 </num-input-selector>
                 <num-input-selector
                     num="${DEFAULT_CONFIG.hachureGap}"
-                    @numchange=${handleHachureGapChange}>
+                    @numchange=${this.handleHachureGapChange}>
                     Hachure Gap
                 </num-input-selector>
                 <num-input-selector
@@ -80,18 +71,18 @@ export class ConfigCreator extends LitElement {
                     step="5"
                     min="-180"
                     max="180"
-                    @numchange=${handleHachureAngleChange}>
+                    @numchange=${this.handleHachureAngleChange}>
                     Hachure Angle
                 </num-input-selector>
                 <num-input-selector
                     num="${DEFAULT_CONFIG.fillWeight}"
-                    @numchange=${handleFillWeightChange}>
+                    @numchange=${this.handleFillWeightChange}>
                     Fill Weight
                 </num-input-selector>
             </div>
             <div class="options">
                 <num-slider-selector
-                    @numchange=${handleRoughnessChange}
+                    @numchange=${this.handleRoughnessChange}
                     min="0"
                     max="10"
                     value="1"
@@ -101,18 +92,18 @@ export class ConfigCreator extends LitElement {
                 <color-selector
                     color="${DEFAULT_CONFIG.fill}"
                     label="Fill color"
-                    @colorchange=${handleFillColorChange}>
+                    @colorchange=${this.handleFillColorChange}>
                 </color-selector>
                 <color-selector
                     color="${DEFAULT_CONFIG.stroke}"
                     label="Stroke color"
-                    @colorchange=${handleStrokeColorChange}>
+                    @colorchange=${this.handleStrokeColorChange}>
                 </color-selector>
                 <div><span>Fill style</span>
                     <wired-combo
                         id="fillStyleCombo"
                         .selected=${this.config.fillStyle}
-                        @selected=${handleFillStyleChange}>
+                        @selected=${this.handleFillStyleChange}>
                         <wired-item value="zigzag">ZigZag</wired-item>
                         <wired-item value="solid">Solid</wired-item>
                         <wired-item value="hachure">Hachure</wired-item>
@@ -127,5 +118,29 @@ export class ConfigCreator extends LitElement {
     updateConf(prop) {
         this._config = { ...this._config, ...prop};
         this.dispatchEvent(new Event('confchange'));
+    }
+    handleFillColorChange(e) {
+        this.updateConf({fill: e.detail.color})
+    }
+    handleStrokeColorChange(e) {
+        this.updateConf({stroke: e.detail.color})
+    }
+    handleFillStyleChange(e) {
+        this.updateConf({fillStyle: e.detail.selected})
+    }
+    handleRoughnessChange(e) {
+        this.updateConf({roughness: e.detail.num})
+    }
+    handleStrokeWidthChange(e) {
+        this.updateConf({strokeWidth: e.detail.num})
+    }
+    handleHachureGapChange(e) {
+        this.updateConf({hachureGap: e.detail.num})
+    }
+    handleHachureAngleChange(e) {
+        this.updateConf({hachureAngle: e.detail.num})
+    }
+    handleFillWeightChange(e) {
+        this.updateConf({fillWeight: e.detail.num})
     }
 }

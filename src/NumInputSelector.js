@@ -47,12 +47,6 @@ export class NumInputSelector extends LitElement {
     }
 
     render() {
-        const handleNumChange = (e) => {
-            const num = e.detail.sourceEvent.target.value;
-            if (isValidStrNum(num)) {
-                this.dispatchEvent(new CustomEvent('numchange', {detail: {num}}))
-            }
-        }
         return html`
             <span><slot></slot>&nbsp;</span>
             <wired-input
@@ -61,8 +55,15 @@ export class NumInputSelector extends LitElement {
                 min="${this._min}"
                 max="${this._max}"
                 value="${this._num}"
-                @input=${handleNumChange}
+                @input=${this.handleNumChange}
             ></wired-input>
         `;
+    }
+
+    handleNumChange(e) {
+        const num = e.detail.sourceEvent.target.value;
+        if (isValidStrNum(num)) {
+            this.dispatchEvent(new CustomEvent('numchange', {detail: {num}}))
+        }
     }
 }

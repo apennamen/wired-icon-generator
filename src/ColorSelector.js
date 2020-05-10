@@ -37,18 +37,9 @@ export class ColorSelector extends LitElement {
     }
 
     render() {
-        const handleColorChange = (e) => {
-            const color = e.detail.sourceEvent.target.value;
-            if (COLOR_REGEX.test(color)) {
-                this._color = color;
-                this.updatedColor();
-                this.dispatchEvent(new CustomEvent('colorchange', {detail: {color}}))
-            }
-        }
-
         return html`
             <span>${this.label}&nbsp;</span>
-            <wired-input @input=${handleColorChange} placeholder="${this._color}"></wired-input>
+            <wired-input @input=${this.handleColorChange} placeholder="${this._color}"></wired-input>
             <canvas height="45" width="30"></canvas>
         `;
     }
@@ -62,5 +53,14 @@ export class ColorSelector extends LitElement {
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = this._color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    handleColorChange(e) {
+        const color = e.detail.sourceEvent.target.value;
+        if (COLOR_REGEX.test(color)) {
+            this._color = color;
+            this.updatedColor();
+            this.dispatchEvent(new CustomEvent('colorchange', {detail: {color}}))
+        }
     }
 }

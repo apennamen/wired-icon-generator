@@ -111,48 +111,19 @@ export class WiredIconGenerator extends LitElement {
   }
 
   render() {
-    const handleLoad = () => {
-      const textarea = this.renderRoot.querySelector('#input');
-      const svgCopy = this.renderRoot.querySelector('#svg');
-      svgCopy.innerHTML = textarea.value;
-      this.inputSvg = textarea.value;
-      return this.requestUpdate();
-    }
-    const handleLoadExample = () => {
-      const textarea = this.renderRoot.querySelector('#input');
-      textarea.value = INPUT_EXAMPLE;
-      handleLoad();
-    }
-    const handleConvert = async () => {
-      await handleLoad();
-      const svgToConvert = this.renderRoot.querySelector('#svg').firstElementChild;
-      if (!svgToConvert) return;
-      const { config } = this.renderRoot.querySelector('config-creator');
-      wiredSvg(svgToConvert, config);
-      this.outputSvg = svgToConvert.outerHTML;
-      return this.requestUpdate();
-    }
-    const handleConfChange = () => {
-      if (this.livereload) {
-        handleConvert();
-      }
-    }
-    const toggleLivereload = (e) => {
-      this.livereload = e.detail.checked;
-    }
     return html`
         <x-wired-textarea id="input" rows="5" .placeholder=${PLACEHOLDER}></x-wired-textarea>
         <div>
-          <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
-          <wired-button id="load-example-btn" elevation="2" @click=${handleLoadExample}>Load Example</wired-button>
+          <wired-button elevation="2" @click=${this.handleLoad}>Load</wired-button>
+          <wired-button id="load-example-btn" elevation="2" @click=${this.handleLoadExample}>Load Example</wired-button>
         </div>
         <div id="config">
-          <config-creator @confchange=${handleConfChange}></config-creator>
+          <config-creator @confchange=${this.handleConfChange}></config-creator>
           <div id="svg" class=${classMap(this.svgClasses)}>${unsafeHTML(this.inputSvg)}</div>
         </div>
         <div>
-          <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
-          <wired-checkbox @change=${toggleLivereload} ?checked=${this.livereload}>Live Reload</wired-checkbox>
+          <wired-button elevation="2" @click=${this.handleConvert}>Convert</wired-button>
+          <wired-checkbox @change=${this.toggleLivereload} ?checked=${this.livereload}>Live Reload</wired-checkbox>
         </div>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;
@@ -173,5 +144,39 @@ export class WiredIconGenerator extends LitElement {
         }
       }
     })
+  }
+  
+  handleLoad() {
+    const textarea = this.renderRoot.querySelector('#input');
+    const svgCopy = this.renderRoot.querySelector('#svg');
+    svgCopy.innerHTML = textarea.value;
+    this.inputSvg = textarea.value;
+    return this.requestUpdate();
+  }
+
+  handleLoadExample() {
+    const textarea = this.renderRoot.querySelector('#input');
+    textarea.value = INPUT_EXAMPLE;
+    this.handleLoad();
+  }
+
+  async handleConvert() {
+    await this.handleLoad();
+    const svgToConvert = this.renderRoot.querySelector('#svg').firstElementChild;
+    if (!svgToConvert) return;
+    const { config } = this.renderRoot.querySelector('config-creator');
+    wiredSvg(svgToConvert, config);
+    this.outputSvg = svgToConvert.outerHTML;
+    return this.requestUpdate();
+  }
+  
+  handleConfChange() {
+    if (this.livereload) {
+      this.handleConvert();
+    }
+  }
+
+  toggleLivereload(e) {
+    this.livereload = e.detail.checked;
   }
 }

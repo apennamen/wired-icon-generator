@@ -35,20 +35,24 @@ export class NumSliderSelector extends LitElement {
     }
 
     render() {
-        const handleNumChange = (e) => {
-            this.value = (+e.detail.value);
-            const num = (this.value * this.factor).toFixed(1);
-            this.dispatchEvent(new CustomEvent('numchange', {detail: {num}}));
-        }
-        const displayValue = (this.value * this.factor).toFixed(1);
         return html`
-            <span><slot></slot>:&nbsp;${displayValue}&nbsp;</span>
+            <span><slot></slot>:&nbsp;${this.displayValue()}&nbsp;</span>
             <wired-slider
                 .min=${this.min}
                 .max=${this.max}
                 .value=${this.value}
-                @change=${handleNumChange}
+                @change=${this.handleNumChange}
             ></wired-slider>
         `;
+    }
+
+    handleNumChange(e) {
+        this.value = (+e.detail.value);
+        const num = this.displayValue();
+        this.dispatchEvent(new CustomEvent('numchange', {detail: {num}}));
+    }
+
+    displayValue() {
+        return (this.value * this.factor).toFixed(1);
     }
 }
