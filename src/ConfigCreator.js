@@ -10,7 +10,7 @@ customElements.define('num-input-selector', NumInputSelector);
 customElements.define('num-slider-selector', NumSliderSelector);
 
 const DEFAULT_CONFIG = {
-    fill: '#f00',
+    fill: '#ec7600',
     fillStyle: 'zigzag',
     fillWeight: 1.5,
     strokeWidth: 1,
