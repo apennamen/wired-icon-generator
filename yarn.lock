@@ -5485,6 +5485,13 @@ wired-link@^2.0.2:
     lit-element "^2.2.1"
     wired-lib "^2.0.0"
 
+wired-slider@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/wired-slider/-/wired-slider-2.0.0.tgz#7c24249c9544f494897a4be4e28fd375220ea689"
+  integrity sha512-MntrSsDjtPrOtJbX7Mo5dYaOwBo8rcb3NAyGTG3zE4O7nCx+pMz+g0NzXogkreMnaxIM969SDRUG+ksxxE/Rcg==
+  dependencies:
+    wired-lib "^2.0.0"
+
 wired-textarea@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/wired-textarea/-/wired-textarea-2.0.2.tgz#44c53ad87ec4258e650f3a699dfd0fbb886051b1"
