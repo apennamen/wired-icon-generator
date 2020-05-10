@@ -45,7 +45,7 @@ export class CodeHighlighter extends LitElement {
                 border: 1px solid var(--scrollbarBG);
               }
               pre {
-                margin-bottom: 0;
+                margin-bottom: 10px;
               }
             `,
         ];

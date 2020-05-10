@@ -9,6 +9,7 @@ import { ConfigCreator } from './ConfigCreator';
 import { CodeHighlighter } from './CodeHighlighter';
 import { wiredSvg } from './wiredSvg';
 import { highlightCss } from './highlightCss';
+import { INPUT_EXAMPLE, PLACEHOLDER, OUTPUT_INIT } from './initTemplate';
 
 customElements.define('x-wired-textarea', ExtWiredTextarea);
 customElements.define('config-creator', ConfigCreator);
@@ -33,6 +34,10 @@ export class WiredIconGenerator extends LitElement {
       }
       wired-checkbox {
         font-size: 2vmin;
+      }
+
+      #load-example-btn {
+        background: var(--secondary-color);
       }
 
       #input {
@@ -71,24 +76,21 @@ export class WiredIconGenerator extends LitElement {
     super();
     this.livereload = true;
     this.inputSvg = '';
-    this.outputSvg = `
-<svg viewbox="0 0 42 42">
-  <text>Grab the converted svg code here!</text>
-</svg>
-    `;
+    this.outputSvg = OUTPUT_INIT;
   }
 
   render() {
-    const placeholder = `Paste your svg here! Like this:
-
-<svg viewbox="0 0 16 16"><path d="M9.5 14c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"></path></svg>
-    `;
     const handleLoad = () => {
       const textarea = this.renderRoot.querySelector('#input');
       const svgCopy = this.renderRoot.querySelector('#svg');
       svgCopy.innerHTML = textarea.value;
       this.inputSvg = textarea.value;
       return this.requestUpdate();
+    }
+    const handleLoadExample = () => {
+      const textarea = this.renderRoot.querySelector('#input');
+      textarea.value = INPUT_EXAMPLE;
+      handleLoad();
     }
     const handleConvert = async () => {
       await handleLoad();
@@ -108,8 +110,11 @@ export class WiredIconGenerator extends LitElement {
       this.livereload = e.detail.checked;
     }
     return html`
-        <x-wired-textarea id="input" rows="5" .placeholder=${placeholder}></x-wired-textarea>
-        <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
+        <x-wired-textarea id="input" rows="5" .placeholder=${PLACEHOLDER}></x-wired-textarea>
+        <div>
+          <wired-button elevation="2" @click=${handleLoad}>Load</wired-button>
+          <wired-button id="load-example-btn" elevation="2" @click=${handleLoadExample}>Load Example</wired-button>
+        </div>
         <div id="config">
           <config-creator @confchange=${handleConfChange}></config-creator>
           <div id="svg">${unsafeHTML(this.inputSvg)}</div>
