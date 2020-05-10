@@ -51,8 +51,4 @@ export class NumSliderSelector extends LitElement {
             ></wired-slider>
         `;
     }
-
-    firstUpdated() {
-
-    }
 }

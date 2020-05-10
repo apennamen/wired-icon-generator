@@ -3,10 +3,10 @@ import 'wired-combo';
 import 'wired-item';
 
 import { ColorSelector } from './ColorSelector';
-import { NumberSelector } from './NumberSelector';
+import { NumInputSelector } from './NumInputSelector';
 import { NumSliderSelector } from './NumSliderSelector';
 customElements.define('color-selector', ColorSelector);
-customElements.define('number-selector', NumberSelector);
+customElements.define('num-input-selector', NumInputSelector);
 customElements.define('num-slider-selector', NumSliderSelector);
 
 const DEFAULT_CONFIG = {
@@ -65,26 +65,26 @@ export class ConfigCreator extends LitElement {
 
         return html`
             <div class="options">
-                <number-selector
-                    label="Stroke Width"
+                <num-input-selector
                     num="${DEFAULT_CONFIG.strokeWidth}"
                     @numchange=${handleStrokeWidthChange}>
-                </number-selector>
-                <number-selector
-                    label="Hachure Gap"
+                    Stroke Width
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.hachureGap}"
                     @numchange=${handleHachureGapChange}>
-                </number-selector>
-                <number-selector
-                    label="Hachure Angle"
+                    Hachure Gap
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.hachureAngle}"
                     @numchange=${handleHachureAngleChange}>
-                </number-selector>
-                <number-selector
-                    label="Fill Weight"
+                    Hachure Angle
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.fillWeight}"
                     @numchange=${handleFillWeightChange}>
-                </number-selector>
+                    Fill Weight
+                </num-input-selector>
             </div>
             <div class="options">
                 <num-slider-selector
