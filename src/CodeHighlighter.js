@@ -60,20 +60,20 @@ export class CodeHighlighter extends LitElement {
     }
 
     render() {
-        const handleCopy = () => {
-            var dummy = document.createElement("textarea");
-            this.shadowRoot.appendChild(dummy);
-            dummy.value = this.code.trim();
-            dummy.select();
-            document.execCommand("copy");
-            this.shadowRoot.removeChild(dummy);
-        }
-        
         const highlightedCode = hljs.highlight('xml', this.code.trim());
         
         return html`
             <pre><code class="xml hljs">${unsafeHTML(highlightedCode.value)}</code></pre>
-            <wired-button elevation="2" @click=${handleCopy}>Copy</wired-button>
+            <wired-button elevation="2" @click=${this.handleCopy}>Copy</wired-button>
         `;
     }
+
+    handleCopy() {
+      const dummy = document.createElement("textarea");
+      this.renderRoot.appendChild(dummy);
+      dummy.value = this.code.trim();
+      dummy.select();
+      document.execCommand("copy");
+      this.renderRoot.removeChild(dummy);
+  }
 }

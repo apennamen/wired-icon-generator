@@ -2,7 +2,7 @@ import merge from 'deepmerge';
 // use createSpaConfig for bundling a Single Page App
 import { createSpaConfig } from '@open-wc/building-rollup';
 import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy-assets';
+import copy from 'rollup-plugin-copy';
 
 // use createBasicConfig to do regular JS to JS bundling
 // import { createBasicConfig } from '@open-wc/building-rollup';
@@ -19,7 +19,7 @@ const baseConfig = createSpaConfig({
   developmentMode: process.env.ROLLUP_WATCH === 'true',
 
   // set to true to inject the service worker registration into your index.html
-  injectServiceWorker: false,
+  injectServiceWorker: true,
 });
 
 export default merge(baseConfig, {
@@ -34,8 +34,8 @@ export default merge(baseConfig, {
   plugins: [
     commonjs(),
     copy({
-      assets: [
-        'favicon',
+      targets: [
+        {src: 'favicon', dest: 'dist'},
       ],
     }),
   ],
