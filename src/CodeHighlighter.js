@@ -1,9 +1,11 @@
 import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
 
 import { highlightCss } from './highlightCss';
+
+hljs.registerLanguage('xml', xml);
 
 export class CodeHighlighter extends LitElement {
 
@@ -44,8 +46,10 @@ export class CodeHighlighter extends LitElement {
                 border-radius: 6px;
                 border: 1px solid var(--scrollbarBG);
               }
-              pre {
-                margin-bottom: 10px;
+              @media (max-width:640px)  {
+                code {
+                  max-width: 80vw;
+                }
               }
             `,
         ];
@@ -53,7 +57,6 @@ export class CodeHighlighter extends LitElement {
 
     cosntructor() {
         this.code='';
-        hljs.registerLanguage('xml', xml);
     }
 
     render() {
