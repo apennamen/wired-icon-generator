@@ -7,13 +7,7 @@ const isValidNumber = (n) => !Number.isNaN(n) && (isInt(n) || isFloat(n));
 const isValidStrNum = (s) => !!s.trim() && isValidNumber(+s);
         
 
-export class NumberSelector extends LitElement {
-    static get properties() {
-        return {
-            label: {type: String},
-        }
-    }
-
+export class NumInputSelector extends LitElement {
     static get styles() {
         return css`
             :host {
@@ -45,7 +39,7 @@ export class NumberSelector extends LitElement {
             }
         }
         return html`
-            <span>${this.label}</span>
+            <span><slot></slot>&nbsp;</span>
             <wired-input @input=${handleNumChange} placeholder="${this._placeholder}"></wired-input>
         `;
     }

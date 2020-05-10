@@ -57,6 +57,7 @@
     "wired-input": "^2.0.2",
     "wired-item": "^2.0.2",
     "wired-link": "^2.0.2",
+    "wired-slider": "^2.0.2",
     "wired-textarea": "^2.0.2"
   }
 }

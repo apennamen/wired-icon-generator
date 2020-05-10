@@ -3,9 +3,11 @@ import 'wired-combo';
 import 'wired-item';
 
 import { ColorSelector } from './ColorSelector';
-import { NumberSelector } from './NumberSelector';
+import { NumInputSelector } from './NumInputSelector';
+import { NumSliderSelector } from './NumSliderSelector';
 customElements.define('color-selector', ColorSelector);
-customElements.define('number-selector', NumberSelector);
+customElements.define('num-input-selector', NumInputSelector);
+customElements.define('num-slider-selector', NumSliderSelector);
 
 const DEFAULT_CONFIG = {
     fill: '#f00',
@@ -63,28 +65,36 @@ export class ConfigCreator extends LitElement {
 
         return html`
             <div class="options">
-                <number-selector
-                    label="Stroke Width"
+                <num-input-selector
                     num="${DEFAULT_CONFIG.strokeWidth}"
                     @numchange=${handleStrokeWidthChange}>
-                </number-selector>
-                <number-selector
-                    label="Hachure Gap"
+                    Stroke Width
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.hachureGap}"
                     @numchange=${handleHachureGapChange}>
-                </number-selector>
-                <number-selector
-                    label="Hachure Angle"
+                    Hachure Gap
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.hachureAngle}"
                     @numchange=${handleHachureAngleChange}>
-                </number-selector>
-                <number-selector
-                    label="Fill Weight"
+                    Hachure Angle
+                </num-input-selector>
+                <num-input-selector
                     num="${DEFAULT_CONFIG.fillWeight}"
                     @numchange=${handleFillWeightChange}>
-                </number-selector>
+                    Fill Weight
+                </num-input-selector>
             </div>
             <div class="options">
+                <num-slider-selector
+                    @numchange=${handleRoughnessChange}
+                    min="0"
+                    max="10"
+                    value="1"
+                    factor="0.1">
+                    Roughness
+                </num-slider-selector>
                 <color-selector
                     color="${DEFAULT_CONFIG.fill}"
                     label="Fill color"
@@ -99,8 +109,7 @@ export class ConfigCreator extends LitElement {
                     <wired-combo
                         id="fillStyleCombo"
                         .selected=${this.config.fillStyle}
-                        @selected=${handleFillStyleChange}
-                    >
+                        @selected=${handleFillStyleChange}>
                         <wired-item value="zigzag">ZigZag</wired-item>
                         <wired-item value="solid">Solid</wired-item>
                         <wired-item value="hachure">Hachure</wired-item>
@@ -108,11 +117,6 @@ export class ConfigCreator extends LitElement {
                         <wired-item value="dashed">Dashed</wired-item>
                     </wired-combo>
                 </div>
-                <number-selector
-                    label="Roughness"
-                    num="${DEFAULT_CONFIG.roughness}"
-                    @numchange=${handleRoughnessChange}>
-                </number-selector>
             </div>
     `;
     }
