@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { classMap } from 'lit-html/directives/class-map';
 import 'wired-textarea';
 import 'wired-button';
 import 'wired-checkbox';
@@ -88,7 +89,14 @@ export class WiredIconGenerator extends LitElement {
         config-creator {
           display: flex;
           flex-direction: column;
-          align-items: center;
+        }
+
+        .sticky {
+          background-color: #fff;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%
         }
       }
     `];
@@ -99,6 +107,7 @@ export class WiredIconGenerator extends LitElement {
     this.livereload = true;
     this.inputSvg = '';
     this.outputSvg = OUTPUT_INIT;
+    this.svgClasses = {sticky: false};
   }
 
   render() {
@@ -139,7 +148,7 @@ export class WiredIconGenerator extends LitElement {
         </div>
         <div id="config">
           <config-creator @confchange=${handleConfChange}></config-creator>
-          <div id="svg">${unsafeHTML(this.inputSvg)}</div>
+          <div id="svg" class=${classMap(this.svgClasses)}>${unsafeHTML(this.inputSvg)}</div>
         </div>
         <div>
           <wired-button elevation="2" @click=${handleConvert}>Convert</wired-button>
@@ -147,5 +156,22 @@ export class WiredIconGenerator extends LitElement {
         </div>
         <code-highlighter .code=${this.outputSvg.trim()}></code-highlighter>
     `;
+  }
+
+  firstUpdated() {
+    const {offsetTop} = this.renderRoot.getElementById('svg');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > offsetTop) {
+        if (!this.svgClasses.sticky) {
+          this.svgClasses.sticky = true;
+          this.requestUpdate();
+        }
+      } else {
+        if (this.svgClasses.sticky) {
+          this.svgClasses.sticky = false;
+          this.requestUpdate();
+        }
+      }
+    })
   }
 }
