@@ -77,6 +77,9 @@ export class ConfigCreator extends LitElement {
                 </num-input-selector>
                 <num-input-selector
                     num="${DEFAULT_CONFIG.hachureAngle}"
+                    step="5"
+                    min="-180"
+                    max="180"
                     @numchange=${handleHachureAngleChange}>
                     Hachure Angle
                 </num-input-selector>
