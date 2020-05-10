@@ -29,7 +29,7 @@ export class ConfigCreator extends LitElement {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
-                font-size: 2vmin;
+                font-size: 14px;
                 font-family: inherit;
                 --wired-item-selected-bg: var(--primary-color);
             }

@@ -33,7 +33,7 @@ export class WiredIconGenerator extends LitElement {
         background: var(--primary-color);
       }
       wired-checkbox {
-        font-size: 2vmin;
+        font-size: 14px;
       }
 
       #load-example-btn {
@@ -42,7 +42,7 @@ export class WiredIconGenerator extends LitElement {
 
       #input {
         font-family: monospace;
-        font-size: 2vmin;
+        font-size: 14px;
         text-align: left;
         background: #fff;
       }
@@ -68,6 +68,28 @@ export class WiredIconGenerator extends LitElement {
 
       code-highlighter {
         margin-top: 2em;
+      }
+
+      @media (max-width:640px)  {
+        #config {
+          width: 100%;
+          margin-top: 2em;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        #svg {
+          order: -1;
+          margin: auto;
+          margin-bottom: 1em;
+        }
+
+        config-creator {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     `];
   }
