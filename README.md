@@ -5,8 +5,9 @@
 
 # Wired Icon Generator
 
-[![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2ddd07a5-1d46-456e-95fd-a0fce2412368/deploy-status)](https://wired-icon-generator.netlify.app/)
+[![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-90C1B3.svg)](https://github.com/open-wc)
+[![Netlify](https://img.shields.io/netlify/2ddd07a5-1d46-456e-95fd-a0fce2412368?color=90C1B3&label=netlify)](https://wired-icon-generator.netlify.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-90C1B3.svg)](https://opensource.org/licenses/MIT)
 
 ## Purpose
 
@@ -26,3 +27,6 @@ It works best with only the viewbox attribute on, like this tool icon:
 <img src="https://user-images.githubusercontent.com/7101875/81468704-78e27e80-91e1-11ea-9239-994ef6aab7bf.png" />
 
 Once you are happy with the result, just copy the output and use it in your website!
+
+## Licence
+MIT Licence - Adrien Pennamen 2020
